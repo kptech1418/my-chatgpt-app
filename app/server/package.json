@@ -1,0 +1,21 @@
+{
+  "name": "my-chatgpt-server",
+  "version": "1.0.0",
+  "description": "MCP server that exposes kptech tools",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "kptech1418@gmail.com",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.20.2",
+    "body-parser": "2.2.0",
+    "cors": "2.8.5",
+    "express": "5.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.17.2"
+  }
+}
