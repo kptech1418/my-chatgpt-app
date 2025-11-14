@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));  // Parse URL-encoded data
 app.use(cors());  // Enable CORS for cross-origin requests
 
 app.use('/tasks', taskRoutes);
-app.use('/flights', flightRoutes);
+app.use('/flightSearch', flightRoutes);
 app.use('/mcp', mcpRoutes);
 
 export default app;  // Export the configured app
