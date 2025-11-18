@@ -6,7 +6,8 @@ import { BASE_URL } from '../../config.js';
 const flightSearchResources = [{
   name: 'flight-search-widget',
   outputTemplateUri: 'ui://widget/flight-search.html',
-  html: fs.readFileSync(path.join('../../web/dist', 'flight-search.html'), 'utf8').trim(),
+  html: fs.readFileSync(path.join('./modules/flight/flight-search-new.html'), 'utf8').trim(),
+  js: fs.readFileSync(path.join('../../web/dist', 'flight-search-bundle.js'), 'utf8').trim(),
 }];
 
 const flightSearchTools = [{

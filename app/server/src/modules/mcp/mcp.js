@@ -35,7 +35,7 @@ const createMcpServer = () => {
             contents: [{
               uri: resource.outputTemplateUri,
               mimeType: "text/html+skybridge",
-              text: resource.html
+              text: resource.html.replace("{REPLACE_BUNDLEJS}", resource.js)
             }]
           })
         );
