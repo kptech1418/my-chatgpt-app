@@ -1,12 +1,11 @@
 import fs from "fs";
 import { z } from "zod";
 import path from 'path';
-import { BASE_URL } from '../../config.js';
 
 const todoResources = [{
   name: 'todo-widget',
   outputTemplateUri: 'ui://widget/todo.html',
-  html: fs.readFileSync(path.join('../../web/dist', 'todo.html'), 'utf8').trim(),
+  html: fs.readFileSync(path.join('./dist', 'todo.html'), 'utf8').trim(),
 }];
 
 const todoTools = [{
@@ -25,7 +24,7 @@ const todoTools = [{
   invoking: 'Creating task...',
   invoked: 'Task created',
   implementation: async ({ text }) => {
-    const response = await fetch(`${BASE_URL}/tasks`, {
+    const response = await fetch(`${process.env.BASE_URL}/tasks`, {
       method: 'POST',
       body: JSON.stringify({ description: text }),
       headers: {
@@ -55,7 +54,7 @@ const todoTools = [{
   invoking: 'Getting tasks...',
   invoked: 'Tasks sent',
   implementation: async () => {
-    const response = await fetch(`${BASE_URL}/tasks`);
+    const response = await fetch(`${process.env.BASE_URL}/tasks`);
     const tasks = await response.json();
     if (tasks.length === 0) {
       return {
@@ -89,7 +88,7 @@ const todoTools = [{
   invoking: 'Completing task...',
   invoked: 'Task complete',
   implementation: async ({ id }) => {
-    const response = await fetch(`${BASE_URL}/tasks/${id}/complete`, { method: 'POST' });
+    const response = await fetch(`${process.env.BASE_URL}/tasks/${id}/complete`, { method: 'POST' });
     const updatedTask = await response.json();
     return {
       structuredContent: updatedTask,

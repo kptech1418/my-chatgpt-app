@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "MCP server that exposes kptech tools",
   "private": true,
+  "main": "app.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "kptech1418@gmail.com",
   "license": "UNLICENSED",
@@ -12,11 +14,13 @@
     "@modelcontextprotocol/sdk": "1.20.2",
     "body-parser": "2.2.0",
     "cors": "2.8.5",
+    "dotenv": "17.2.3",
     "ejs": "3.1.10",
     "express": "5.1.0",
     "zod": "3.25.76"
   },
   "devDependencies": {
-    "@modelcontextprotocol/inspector": "^0.17.2"
+    "@modelcontextprotocol/inspector": "^0.17.2",
+    "nodemon": "^3.1.11"
   }
 }

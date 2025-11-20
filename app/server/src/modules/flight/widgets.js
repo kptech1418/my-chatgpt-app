@@ -1,13 +1,12 @@
 import fs from "fs";
 import { z } from "zod";
 import path from 'path';
-import { BASE_URL } from '../../config.js';
 
 const flightSearchResources = [{
   name: 'flight-search-widget',
   outputTemplateUri: 'ui://widget/flight-search.html',
-  html: fs.readFileSync(path.join('./modules/flight/flight-search-new.html'), 'utf8').trim(),
-  js: fs.readFileSync(path.join('../../web/dist', 'flight-search-bundle.js'), 'utf8').trim(),
+  html: fs.readFileSync(path.join('./src/modules/flight/flight-search-new.html'), 'utf8').trim(),
+  js: fs.readFileSync(path.join('./dist', 'flight-search-bundle.js'), 'utf8').trim(),
 }];
 
 const flightSearchTools = [{
@@ -34,7 +33,7 @@ const flightSearchTools = [{
   invoking: 'Searching flights...',
   invoked: 'Flights found',
   implementation: async ({ origin, destination, date }) => {
-    const response = await fetch(`${BASE_URL}/flightSearch`, {
+    const response = await fetch(`${process.env.BASE_URL}/flightSearch`, {
       method: 'POST',
       body: JSON.stringify({ origin, destination, date }),
       headers: {

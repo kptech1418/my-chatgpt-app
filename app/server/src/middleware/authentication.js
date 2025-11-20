@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import { CLIENT_SECRET, BASE_URL } from '../config.js';
 
 export const validateMcpToken = (req, res, next) => {
   const authHeader = req.headers.authorization?.split(' ');
@@ -15,7 +14,7 @@ export const validateMcpToken = (req, res, next) => {
 
   try {
     console.log('auth token', token);
-    // const decoded = jwt.verify(token, CLIENT_SECRET);
+    // const decoded = jwt.verify(token, process.env.CLIENT_SECRET);
     // req.authInfo = {
     //   claims: decoded,
     // };

@@ -8,7 +8,7 @@ module.exports = {
     ['flight-search-bundle']: './src/widgets/FlightSearch/index.js',
   },
   output: {
-    path: path.resolve('./dist'),
+    path: path.resolve('../server/dist'),
     filename: '[name].js',
     clean: true, // Clean the output directory before emit
   },
