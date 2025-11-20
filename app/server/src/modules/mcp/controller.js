@@ -4,6 +4,7 @@ import mcpServer from "./mcp.js";
 const mcpController = {
   createMcpServer: async (req, res) => {
     // const authToken = req.headers['authorization'];
+    console.log('auth header', req.headers['authorization']);
     const server = mcpServer();
     console.log('Received MCP request', server);
 

@@ -9,15 +9,16 @@ export const validateMcpToken = (req, res, next) => {
   if (type?.toLowerCase() !== 'bearer' || !token) {
     return res
       .status(401)
-      .set('WWW-Authenticate', `Bearer resource_metadata_uri="http://${BASE_URL}/.well-known/oauth-protected-resource"`)
+      .set('WWW-Authenticate', `Bearer`)
       .json({ error: 'unauthorized' });
   }
 
   try {
-    const decoded = jwt.verify(token, CLIENT_SECRET);
-    req.authInfo = {
-      claims: decoded,
-    };
+    console.log('auth token', token);
+    // const decoded = jwt.verify(token, CLIENT_SECRET);
+    // req.authInfo = {
+    //   claims: decoded,
+    // };
   } catch(err) {
     return res
       .status(401)

@@ -15,7 +15,10 @@ const FlightSearch = () => {
   }, [toolOutput]);
 
   const handleOnClick = (id) => () => {
-    window.open(`https://www.united.com?flightId=${id}`, "_blank");
+    console.log('click event', window.openai?.openExternal)
+    if (window.openai?.openExternal) {
+      window.openai.openExternal({ href: `https://www.united.com?flightId=${id}` });
+    }
   };
 
   return (
