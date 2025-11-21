@@ -1,6 +1,7 @@
 import fs from "fs";
 import { z } from "zod";
 import path from 'path';
+import { BASE_URL } from "../../../config.js";
 
 const todoResources = [{
   name: 'todo-widget',
@@ -24,13 +25,15 @@ const todoTools = [{
   invoking: 'Creating task...',
   invoked: 'Task created',
   implementation: async ({ text }) => {
-    const response = await fetch(`${process.env.BASE_URL}/tasks`, {
+    const response = await fetch(`http://localhost:3000/tasks`, {
       method: 'POST',
       body: JSON.stringify({ description: text }),
       headers: {
+        'Authorization': context.requestInfo.headers.authorization,
         'Content-Type': 'application/json',
       }
     });
+    console.log('tasktoolpostauthheaders', context.requestInfo.headers.authorization);
     const newTask = await response.json();
     return {
       structuredContent: newTask,
@@ -54,7 +57,13 @@ const todoTools = [{
   invoking: 'Getting tasks...',
   invoked: 'Tasks sent',
   implementation: async () => {
-    const response = await fetch(`${process.env.BASE_URL}/tasks`);
+    const response = await fetch(`http://localhost:3000/tasks`, {
+      method: 'GET',
+      headers: {
+        'Authorization': context.requestInfo.headers.authorization,
+      }
+    });
+    console.log('tasktoolgetauthheaders', context.requestInfo.headers.authorization);
     const tasks = await response.json();
     if (tasks.length === 0) {
       return {
@@ -88,7 +97,13 @@ const todoTools = [{
   invoking: 'Completing task...',
   invoked: 'Task complete',
   implementation: async ({ id }) => {
-    const response = await fetch(`${process.env.BASE_URL}/tasks/${id}/complete`, { method: 'POST' });
+    const response = await fetch(`http://localhost:3000/tasks/${id}/complete`, {
+      method: 'POST',
+      headers: {
+        'Authorization': context.requestInfo.headers.authorization,
+      }
+    });
+    console.log('tasktoolupdateauthheaders', context.requestInfo.headers.authorization);
     const updatedTask = await response.json();
     return {
       structuredContent: updatedTask,

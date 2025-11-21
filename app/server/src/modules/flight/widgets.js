@@ -1,6 +1,7 @@
 import fs from "fs";
 import { z } from "zod";
 import path from 'path';
+import { BASE_URL } from "../../../config.js";
 
 const flightSearchResources = [{
   name: 'flight-search-widget',
@@ -32,14 +33,16 @@ const flightSearchTools = [{
   outputTemplateUri: 'ui://widget/flight-search.html',
   invoking: 'Searching flights...',
   invoked: 'Flights found',
-  implementation: async ({ origin, destination, date }) => {
-    const response = await fetch(`${process.env.BASE_URL}/flightSearch`, {
+  implementation: async ({ origin, destination, date }, context) => {
+    const response = await fetch(`http://localhost:3000/flightSearch`, {
       method: 'POST',
       body: JSON.stringify({ origin, destination, date }),
       headers: {
+        'Authorization': context.requestInfo.headers.authorization,
         'Content-Type': 'application/json',
       }
     });
+    console.log('flighttoolauthheaders', context.requestInfo.headers.authorization);
     const matchingFlights = await response.json();
     if (matchingFlights?.length) {
       return {

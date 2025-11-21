@@ -13,7 +13,10 @@ export const validateMcpToken = (req, res, next) => {
   }
 
   try {
-    console.log('auth token', token);
+    console.log('auth token', token, req.baseUrl);
+    if (token !== 'token-new-123-guest' && token !== 'token-new-123-user') {
+      throw new Error('unauthorized');
+    }
     // const decoded = jwt.verify(token, process.env.CLIENT_SECRET);
     // req.authInfo = {
     //   claims: decoded,
